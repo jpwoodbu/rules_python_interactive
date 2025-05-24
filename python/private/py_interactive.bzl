@@ -18,7 +18,7 @@ def py_interactive(name, deps, pushes, **kwargs):
   """
   native.py_binary(
     name = name,
-    srcs = ["//python:interactive.py"],
+    srcs = ["@rules_python_interactive//python:interactive.py"],
     main = "interactive.py",
     deps = deps,
     args = _quote_args(pushes),
