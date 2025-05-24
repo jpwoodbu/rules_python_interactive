@@ -1,0 +1,16 @@
+load("@rules_python//python:defs.bzl", "py_library")
+load("//python:defs.bzl", "py_interactive")
+
+py_library(
+    name = "example",
+    srcs = ["example.py"],
+)
+
+py_interactive(
+    name = "example_interactive",
+    deps = [":example"],
+    pushes = [
+        "from examples import example",
+        "example.usage()",
+    ],
+)
