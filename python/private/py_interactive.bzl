@@ -2,7 +2,7 @@
 
 
 def _quote_args(args):
-  """Wrap Pyhton statements in quotes.
+  """Wrap Python statements in quotes.
 
   This prevents statements with whitespace from being broken up within sys.argv.
   """
