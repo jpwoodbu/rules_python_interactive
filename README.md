@@ -1,7 +1,8 @@
 # rules_python_interactive
 
-This module makes it easy to start a Python shell which can import modules from
-`py_library` targets for easier debugging. What it does is similar to what the
+This module makes it easy to start a Python shell **(with tab completition!)**
+which can import modules from `py_library` targets for easier debugging. What it
+does is similar to what the
 [REPL](https://github.com/bazel-contrib/rules_python/blob/main/docs/repl.md)
 feature in `rules_python` does, but for some, perhaps more ergonomically.
 Importantly, if you commonly need a Python shell for debugging,
