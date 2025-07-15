@@ -31,7 +31,7 @@ load("@rules_python_interactive//python:defs.bzl", "py_interactive")
 
 py_interactive(
     name = "my_library_interactive",  # This can be any name you like.
-    deps = "[:my_library]",
+    deps = [":my_library"],
 )
 ```
 Note that `py_interactive` wraps
@@ -71,7 +71,7 @@ For example:
 ```bzl
 py_interactive(
     name = "my_library_interactive",
-    deps = "[:my_library]",
+    deps = [":my_library"],
     pushes = [
         "import my_library",
         "my_library.do_some_set_up()",
@@ -98,7 +98,7 @@ bazel_dep(name = "rules_python_interactive", version = "0.2.0", repo_name="some_
 ```bzl
 py_interactive(
     name = "my_library_interactive",
-    deps = "[:my_library]",
+    deps = [":my_library"],
     repo_name = "some_other_repo_name",
 )
 ```
