@@ -1,19 +1,24 @@
 # rules_python_interactive
 
-This module makes it easy to start a Python shell **(with tab completition!)**
-which can import modules from `py_library` targets for easier debugging. What it
-does is similar to what the
+This module makes it easy to start a Python shell
+ **(with tab completition!)**[^1]
+ which can import modules from `py_library` targets for easier debugging. What
+ it does is similar to what the
 [REPL](https://github.com/bazel-contrib/rules_python/blob/main/docs/repl.md)
 feature in `rules_python` does, but for some, perhaps more ergonomically.
 Importantly, if you commonly need a Python shell for debugging,
 `rules_python_interactive` makes starting one as easy as running a Bazel target.
+
+[^1]: Tab completion only works on supported platforms, which are the platforms
+where [GNU readline](https://docs.python.org/3/library/readline.html) is
+available. 
 
 ## Setup
 
 Modify your `MODULE.bazel` file to load `rules_python_interactive`. For example:
 
 ```bzl
-bazel_dep(name = "rules_python_interactive", version = "0.2.0")
+bazel_dep(name = "rules_python_interactive", version = "0.1.1")
 
 git_override(
     module_name = "rules_python_interactive",
@@ -91,7 +96,7 @@ For example:
 
 `MODULE.bazel`
 ```bzl
-bazel_dep(name = "rules_python_interactive", version = "0.2.0", repo_name="some_other_repo_name")
+bazel_dep(name = "rules_python_interactive", version = "0.1.1", repo_name="some_other_repo_name")
 ```
 
 `BUILD.bazel`

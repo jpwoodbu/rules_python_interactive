@@ -1,5 +1,9 @@
 import code
-import readline
+
+try:
+    import readline
+except ImportError:
+    pass  # not all platforms have readline
 import rlcompleter
 import sys
 
@@ -9,6 +13,7 @@ class DynamicCompleter(rlcompleter.Completer):
     A custom completer that dynamically updates its namespace
     to include new imports made within the interactive session.
     """
+
     def __init__(self, namespace):
         # We store a *reference* to the namespace, not a copy,
         # so that changes to the namespace are reflected.
@@ -28,20 +33,26 @@ def main(argv: list[str]) -> None:
     # modules imported in the script itself are available from the start.
     interactive_namespace = globals().copy()
 
-    # Set up the dynamic completer, passing the interactive_namespace
-    # This is the crucial change.
-    completer = DynamicCompleter(interactive_namespace)
-    readline.set_completer(completer.complete)
+    if "readline" in globals():
+        # Set up the dynamic completer, passing the interactive_namespace
+        # This is the crucial change.
+        completer = DynamicCompleter(interactive_namespace)
+        readline.set_completer(completer.complete)
 
-    # Enable tab completion
-    # TODO(jpwoodbu) Use readline.backend instead of readline.__doc__ once we
-    # can depend on having Python >=3.13.
-    if 'libedit' in readline.__doc__: # type: ignore
-        readline.parse_and_bind("bind ^I rl_complete")
-    elif 'GNU readline' in readline.__doc__: # type: ignore
-        readline.parse_and_bind("tab: complete")
+        # Enable tab completion
+        # TODO(jpwoodbu) Use readline.backend instead of readline.__doc__ once we
+        # can depend on having Python >=3.13.
+        if "libedit" in readline.__doc__:  # type: ignore
+            readline.parse_and_bind("bind ^I rl_complete")
+        elif "GNU readline" in readline.__doc__:  # type: ignore
+            readline.parse_and_bind("tab: complete")
+        else:
+            print("Could not enable tab completion!")
     else:
-        print('Could not enable tab completion!')
+        print(
+            "WARNING: Tab completion not enabled: "
+            "readline module unavailable on this platform."
+        )
 
     console = code.InteractiveConsole(locals=interactive_namespace)
     # Run statements provided as arguments on the command line, i.e. "pushes".
