@@ -42,9 +42,9 @@ def main(argv: list[str]) -> None:
         # Enable tab completion
         # TODO(jpwoodbu) Use readline.backend instead of readline.__doc__ once we
         # can depend on having Python >=3.13.
-        if "libedit" in readline.__doc__:  # type: ignore
+        if "libedit" in (readline.__doc__ or ""):
             readline.parse_and_bind("bind ^I rl_complete")
-        elif "GNU readline" in readline.__doc__:  # type: ignore
+        elif "GNU readline" in (readline.__doc__ or ""):
             readline.parse_and_bind("tab: complete")
         else:
             print("Could not enable tab completion!")
